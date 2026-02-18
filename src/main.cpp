@@ -1,11 +1,7 @@
 #include <GxEPD2_BW.h>
 #include <Adafruit_GFX.h>
 #include <U8g2_for_Adafruit_GFX.h>
-
-#define CS_PIN    10
-#define DC_PIN    9
-#define RST_PIN   8
-#define BUSY_PIN  7
+#include "config.h"
 
 GxEPD2_BW<GxEPD2_290_T94_V2, GxEPD2_290_T94_V2::HEIGHT> display(GxEPD2_290_T94_V2(CS_PIN, DC_PIN, RST_PIN, BUSY_PIN));
 U8G2_FOR_ADAFRUIT_GFX u8g2_for_adafruit;
