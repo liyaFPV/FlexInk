@@ -3,10 +3,11 @@
 #include <U8g2_for_Adafruit_GFX.h>
 #include "config.h"
 #include <SPI.h>
-#include "sd.h"
+#include "drivers/sd.h"
 #include "fdb.h"
 #include "menu.h"
-#include "display_api.h"
+#include "drivers/display_api.h"
+#include "drivers/imu.h"
 
 void setup()
 {
@@ -18,6 +19,7 @@ void setup()
   digitalWrite(CS_PIN, HIGH);
   sd_init();
   elink_init();
+  imu_setup();
   
   draw_menu();
   display_update();

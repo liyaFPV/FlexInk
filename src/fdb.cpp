@@ -7,33 +7,46 @@ void debug_loop()
     while (Serial.available())
     {
         char c = Serial.read();
-        
+
         if (c == '\n')
         {
             Serial.println();
             cmd.trim();
 
-            if (cmd == "sd")
+            if (cmd == "help" || cmd == "?")
             {
-                sd_info();
+                Serial.println("Commands:");
+                Serial.println("help");
+                Serial.println("sd");
+                Serial.println("reboot");
+                Serial.println("info");
+                Serial.println("imu");
+                Serial.println("imu_com");
             }
-            if (cmd == "reboot")
-            {
-                ESP.restart();
-            }
-            if (cmd=="info")
+            else if (cmd == "info")
             {
                 Serial.printf("Free heap: %u bytes\n", ESP.getFreeHeap());
                 Serial.printf("SD card size: %llu MB\n", sd_get_size());
                 Serial.println(FW_VERSION);
             }
-            else if (cmd == "help" or cmd == "?")
+            else if (cmd == "imu")
             {
-                Serial.println("Commands:");
-                Serial.println("sd");
-                Serial.println("reboot");
-                Serial.println("info");
-                Serial.println("help");
+                imu_test();
+            }
+            else if (cmd == "imu_com")
+            {
+                while (true)
+                {
+                    imu_comTest();
+                }
+            }
+            else if (cmd == "reboot")
+            {
+                ESP.restart();
+            }
+            else if (cmd == "sd")
+            {
+                sd_info();
             }
             else
             {

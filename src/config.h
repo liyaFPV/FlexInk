@@ -10,4 +10,7 @@
 #define SD_MISO 2
 #define SD_SCK  12
 
+#define imu_sda 5
+#define imu_scl 4
+
 #define FW_VERSION "FLEX OS 0.1"
