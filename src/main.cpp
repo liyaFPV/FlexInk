@@ -19,7 +19,6 @@ void setup()
   sd_init();
   elink_init();
   
-  draw_bar();
   draw_menu();
   display_update();
 }

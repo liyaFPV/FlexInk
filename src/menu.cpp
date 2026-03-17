@@ -7,5 +7,11 @@ void draw_bar(){
 }
 
 void draw_menu(){
-    drawRect(0, 0, 296, 128, BLACK);
+    draw_bar();
+    setCursor(0, 30);
+    print(">");
+    for (int i = 0; i < appCount; i++) {
+        setCursor(10, 30 + i * 20);
+        print(appName[i]);
+    }
 }
