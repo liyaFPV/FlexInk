@@ -9,3 +9,5 @@
 #define SD_MOSI 13
 #define SD_MISO 2
 #define SD_SCK  12
+
+#define FW_VERSION "FLEX OS 0.1"
