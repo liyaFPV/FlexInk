@@ -22,6 +22,7 @@ void debug_loop()
                 Serial.println("info");
                 Serial.println("imu");
                 Serial.println("imu_com");
+                Serial.println("rtc");
             }
             else if (cmd == "info")
             {
@@ -47,6 +48,10 @@ void debug_loop()
             else if (cmd == "sd")
             {
                 sd_info();
+            }
+            else if (cmd == "rtc")
+            {
+                rtc_Test();
             }
             else
             {

@@ -13,4 +13,7 @@
 #define imu_sda 5
 #define imu_scl 4
 
+#define rtc_D 5
+#define rtc_C 4
+
 #define FW_VERSION "FLEX OS 0.1"

@@ -8,6 +8,7 @@
 #include "menu.h"
 #include "drivers/display_api.h"
 #include "drivers/imu.h"
+#include "drivers/rtc.h"
 
 void setup()
 {
@@ -20,11 +21,11 @@ void setup()
   sd_init();
   elink_init();
   imu_setup();
-  
-  draw_menu();
-  display_update();
+  rtc_setup();
 }
 
 void loop() {
   debug_loop();
+  draw_menu();
+  display_update();
 }

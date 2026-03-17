@@ -1,8 +1,11 @@
 #include "menu.h"
 
 void draw_bar(){
+    fillRect(0, 0, 296, 12, WHITE);
     setCursor(0, 10);
-    print("23:59");
+    print(rtc_getTime_HMS().c_str());
+    setCursor(260, 10);
+    print("100%");
     drawLine(0, 11, 296, 11, BLACK);
 }
 
