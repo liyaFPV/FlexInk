@@ -1,5 +1,12 @@
 #include "sd.h"
 uint8_t cardType;
+
+bool sd_status = false;
+
+bool get_sdStatus(){
+    return sd_status;
+}
+
 bool sd_init()
 {
     pinMode(SD_CS, OUTPUT);
@@ -12,6 +19,7 @@ bool sd_init()
     }
 
     Serial.println("SD init OK");
+    sd_status=true;
     return true;
 }
 

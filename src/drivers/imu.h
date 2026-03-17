@@ -4,3 +4,4 @@
 void imu_test();
 void imu_setup();
 void imu_comTest();
+bool get_imuStatus();

@@ -22,6 +22,10 @@ void setup()
   elink_init();
   imu_setup();
   rtc_setup();
+  slave_test();
+  display_update();
+  delay(1000);
+  clear_screen();
 }
 
 void loop() {

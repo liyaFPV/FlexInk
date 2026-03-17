@@ -1,11 +1,16 @@
 #include "imu.h"
 
 LSM6DS3 imu;
+bool imu_initialized = false;
+bool get_imuStatus(){
+    return imu_initialized;
+}
 
 void imu_setup() {
     Wire.begin(imu_sda, imu_scl);
-    if (imu.begin() != 0) {
-        Serial.println("Failed to initialize IMU");
+    if (imu.begin() == 0) {
+        Serial.println("IMU pass");
+        imu_initialized=true;
     }
 }
 

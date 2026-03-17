@@ -1,5 +1,17 @@
 #include "menu.h"
 
+void slave_test(){
+    clear_screen();
+    if(get_imuStatus()){
+        setCursor(0, 30);
+        print("IMU Pass");
+    }
+    if(get_sdStatus()){
+        setCursor(0, 60);   
+        print("SD Pass");
+    }
+}
+
 void draw_bar(){
     fillRect(0, 0, 296, 12, WHITE);
     setCursor(0, 10);
