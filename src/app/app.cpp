@@ -1,4 +1,18 @@
 #include "app.h"
+#include "test.h"
 
-const char* appName[] = {"Clock", "Calendar", "Weather", "Settings"};
+App appName[] = {
+    {"test", test},
+    {"тест", test}
+};
 const int appCount = sizeof(appName) / sizeof(appName[0]);
+
+void runApp(const char* name) {
+    for (int i = 0; i < appCount; i++) {
+        if (strcmp(appName[i].name, name) == 0) {
+            appName[i].func();
+            return;
+        }
+    }
+    Serial.println("Функция не найдена");
+}

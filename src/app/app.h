@@ -1,7 +1,11 @@
-#ifndef APP_H
-#define APP_H
+#pragma once
 
-extern const char* appName[];  // объявление массива
-extern const int appCount;      // объявление количества
+struct App {
+    const char* name;
+    void (*func)();
+};
 
-#endif
+extern App appName[];
+extern const int appCount;
+
+void runApp(const char* name);

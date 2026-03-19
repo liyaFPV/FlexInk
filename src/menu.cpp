@@ -1,5 +1,7 @@
 #include "menu.h"
 
+int Cursor=0;
+
 void slave_test(){
     clear_screen();
     if(get_imuStatus()){
@@ -13,7 +15,7 @@ void slave_test(){
 }
 
 void draw_bar(){
-    fillRect(0, 0, 296, 12, WHITE);
+    fillRect(0, 0, 296, 128, WHITE);
     setCursor(0, 10);
     print(rtc_getTime_HMS().c_str());
     setCursor(260, 10);
@@ -21,12 +23,22 @@ void draw_bar(){
     drawLine(0, 11, 296, 11, BLACK);
 }
 
-void draw_menu(){
+void draw_menu() {
+    if (up_onClick()) Cursor++;
+    if (down_onClick()) Cursor--;
+    if (ok_onClick()) runApp(appName[Cursor].name);
+
+    if (Cursor < 0) Cursor = appCount - 1;
+    if (Cursor >= appCount) Cursor = 0;
+
     draw_bar();
-    setCursor(0, 30);
-    print(">");
+
     for (int i = 0; i < appCount; i++) {
-        setCursor(10, 30 + i * 20);
-        print(appName[i]);
+        setCursor(10, 25 + i * 15);
+        print(appName[i].name);
     }
+
+    // рисуем курсор
+    setCursor(0, 25 + Cursor * 15);
+    print(">");
 }

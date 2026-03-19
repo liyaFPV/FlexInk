@@ -8,7 +8,7 @@ U8G2_FOR_ADAFRUIT_GFX u8g2_for_adafruit;
 void elink_init() {
   // hardware SPI с кастомными пинами
   SPI.begin(CLK_PIN, -1, DIN_PIN, CS_PIN); // SCK, MISO(-1), MOSI, CS
-  display.init();
+  display.init(1);
   display.setRotation(1);
   display.fillScreen(GxEPD_WHITE);
   u8g2_for_adafruit.begin(display);

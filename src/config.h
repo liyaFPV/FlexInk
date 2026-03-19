@@ -16,4 +16,10 @@
 #define rtc_D 5
 #define rtc_C 4
 
+#define btn_up_pin 35
+#define btn_ok_pin 36
+#define btn_down_pin 37
+#define btn_return_pin 38
+
+
 #define FW_VERSION "FLEX OS 0.1"
