@@ -3,7 +3,8 @@
 
 App appName[] = {
     {"test", test},
-    {"тест", test}
+    {"test", test},
+    {"тест2", test}
 };
 const int appCount = sizeof(appName) / sizeof(appName[0]);
 

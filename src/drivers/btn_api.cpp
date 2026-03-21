@@ -1,25 +1,93 @@
 #include "drivers/btn_api.h"
 
-bool up_click, up_hold;
-bool ok_click, ok_hold;
-bool down_click, down_hold;
-bool return_click, return_hold;
+volatile bool up_click = false;
+volatile bool ok_click = false;
+volatile bool down_click = false;
+volatile bool return_click = false;
 
-void btn_begin(){
+volatile uint32_t last_up = 0;
+volatile uint32_t last_ok = 0;
+volatile uint32_t last_down = 0;
+volatile uint32_t last_return = 0;
+
+const uint32_t DEBOUNCE_MS = 150;
+
+void IRAM_ATTR btn_LOW_up_irs(){
+    uint32_t now = millis();
+    if(now - last_up > DEBOUNCE_MS){
+        up_click = true;
+        last_up = now;
+        Serial.println("up true");
+    }
+}
+
+void IRAM_ATTR btn_LOW_ok_irs(){
+    uint32_t now = millis();
+    if(now - last_ok > DEBOUNCE_MS){
+        ok_click = true;
+        last_ok = now;
+        Serial.println("ok true");
+    }
+}
+
+void IRAM_ATTR btn_LOW_down_irs(){
+    uint32_t now = millis();
+    if(now - last_down > DEBOUNCE_MS){
+        down_click = true;
+        last_down = now;
+        Serial.println("down true");
+    }
+}
+
+void IRAM_ATTR btn_LOW_return_irs(){
+    uint32_t now = millis();
+    if(now - last_return > DEBOUNCE_MS){
+        return_click = true;
+        last_return = now;
+        Serial.println("return true");
+    }
+}
+
+void btn_begin() {
     pinMode(btn_up_pin, INPUT_PULLUP);
     pinMode(btn_ok_pin, INPUT_PULLUP);
     pinMode(btn_down_pin, INPUT_PULLUP);
     pinMode(btn_return_pin, INPUT_PULLUP);
+
+    attachInterrupt(digitalPinToInterrupt(btn_up_pin), btn_LOW_up_irs, FALLING);
+    attachInterrupt(digitalPinToInterrupt(btn_ok_pin), btn_LOW_ok_irs, FALLING);
+    attachInterrupt(digitalPinToInterrupt(btn_down_pin), btn_LOW_down_irs, FALLING);
+    attachInterrupt(digitalPinToInterrupt(btn_return_pin), btn_LOW_return_irs, FALLING);
 }
 
-void btn_tick(){
-    up_click = digitalRead(btn_up_pin) == LOW;
-    ok_click = digitalRead(btn_ok_pin) == LOW;
-    down_click = digitalRead(btn_down_pin) == LOW;
-    return_click = digitalRead(btn_return_pin) == LOW;
+bool up_onClick(){
+    if(up_click){
+        up_click = false;
+        return true;
+    }
+    return false;
 }
 
-bool up_onClick(){ return up_click; }
-bool ok_onClick(){ return ok_click; }
-bool down_onClick(){ return down_click; }
-bool return_onClick(){ return return_click; }
+bool ok_onClick(){
+    if(ok_click){
+        ok_click = false;
+        return true;
+    }
+    return false;
+}
+
+bool down_onClick(){
+    if(down_click){
+        down_click = false;
+        return true;
+    }
+    return false;
+}
+
+bool return_onClick(){
+    if(return_click){
+        return_click = false;
+        return true;
+    }
+    return false;
+}

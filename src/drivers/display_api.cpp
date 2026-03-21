@@ -3,10 +3,9 @@ GxEPD2_BW<GxEPD2_290_T94_V2, GxEPD2_290_T94_V2::HEIGHT> display(GxEPD2_290_T94_V
 
 U8G2_FOR_ADAFRUIT_GFX u8g2_for_adafruit;
 
-
-
 void elink_init() {
   // hardware SPI с кастомными пинами
+  #define ENABLE_GxEPD2_GFX 0
   SPI.begin(CLK_PIN, -1, DIN_PIN, CS_PIN); // SCK, MISO(-1), MOSI, CS
   display.init(1);
   display.setRotation(1);

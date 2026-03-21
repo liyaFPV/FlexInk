@@ -6,7 +6,6 @@ void test(){
     print("test");
     display_update();
     while (true){
-        btn_tick();
         if(return_onClick()){
             return;
         }

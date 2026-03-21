@@ -34,7 +34,6 @@ void setup()
 }
 
 void loop() {
-  btn_tick();
   debug_loop();
   draw_menu();
   display_update();
