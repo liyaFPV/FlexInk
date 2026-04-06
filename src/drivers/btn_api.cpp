@@ -12,43 +12,44 @@ volatile uint32_t last_return = 0;
 
 const uint32_t DEBOUNCE_MS = 150;
 
-void IRAM_ATTR btn_LOW_up_irs(){
+void IRAM_ATTR btn_LOW_up_irs() {
     uint32_t now = millis();
-    if(now - last_up > DEBOUNCE_MS){
+
+    if (now - last_up > DEBOUNCE_MS) {
         up_click = true;
         last_up = now;
-        Serial.println("up true");
     }
 }
 
-void IRAM_ATTR btn_LOW_ok_irs(){
+void IRAM_ATTR btn_LOW_ok_irs() {
     uint32_t now = millis();
-    if(now - last_ok > DEBOUNCE_MS){
+
+    if (now - last_ok > DEBOUNCE_MS) {
         ok_click = true;
         last_ok = now;
-        Serial.println("ok true");
     }
 }
 
-void IRAM_ATTR btn_LOW_down_irs(){
+void IRAM_ATTR btn_LOW_down_irs() {
     uint32_t now = millis();
-    if(now - last_down > DEBOUNCE_MS){
+
+    if (now - last_down > DEBOUNCE_MS) {
         down_click = true;
         last_down = now;
-        Serial.println("down true");
     }
 }
 
-void IRAM_ATTR btn_LOW_return_irs(){
+void IRAM_ATTR btn_LOW_return_irs() {
     uint32_t now = millis();
-    if(now - last_return > DEBOUNCE_MS){
+
+    if (now - last_return > DEBOUNCE_MS) {
         return_click = true;
         last_return = now;
-        Serial.println("return true");
     }
 }
 
 void btn_begin() {
+
     pinMode(btn_up_pin, INPUT_PULLUP);
     pinMode(btn_ok_pin, INPUT_PULLUP);
     pinMode(btn_down_pin, INPUT_PULLUP);
@@ -60,32 +61,32 @@ void btn_begin() {
     attachInterrupt(digitalPinToInterrupt(btn_return_pin), btn_LOW_return_irs, FALLING);
 }
 
-bool up_onClick(){
-    if(up_click){
+bool up_onClick() {
+    if (up_click) {
         up_click = false;
         return true;
     }
     return false;
 }
 
-bool ok_onClick(){
-    if(ok_click){
+bool ok_onClick() {
+    if (ok_click) {
         ok_click = false;
         return true;
     }
     return false;
 }
 
-bool down_onClick(){
-    if(down_click){
+bool down_onClick() {
+    if (down_click) {
         down_click = false;
         return true;
     }
     return false;
 }
 
-bool return_onClick(){
-    if(return_click){
+bool return_onClick() {
+    if (return_click) {
         return_click = false;
         return true;
     }

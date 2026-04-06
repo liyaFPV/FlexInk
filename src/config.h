@@ -22,4 +22,4 @@
 #define btn_return_pin 38
 
 
-#define FW_VERSION "FLEX OS 0.1"
+#define FW_VERSION "FLEX OS 0.3b"
