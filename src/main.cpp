@@ -4,14 +4,8 @@
 #include "config.h"
 #include <SPI.h>
 #include "drivers/sd.h"
-#include "fdb.h"
-#include "menu.h"
 #include "drivers/display_api.h"
 #include "drivers/imu.h"
-#include "drivers/rtc.h"
-#include "drivers/btn_api.h"
-#include "app/app.h"
-
 void setup()
 {
   Serial.begin(115200);
@@ -20,21 +14,15 @@ void setup()
 
   pinMode(CS_PIN, OUTPUT);
   digitalWrite(CS_PIN, HIGH);
-  btn_begin();
   sd_init();
   elink_init();
   imu_setup();
-  rtc_setup();
-  slave_test();
   display_update();
   delay(1000);
   clear_screen();
-  draw_menu();
   display_update();
 }
 
 void loop() {
-  debug_loop();
-  draw_menu();
   display_update();
 }
