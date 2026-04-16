@@ -16,28 +16,14 @@ bool imu_getStatus(){
 }
 
 void imu_test(){
-    Serial.print("ax:");
-    Serial.print(imu.readFloatAccelX());
-    Serial.print(" ");
+    Accel d = imu_read();
 
-    Serial.print("ay:");
-    Serial.print(imu.readFloatAccelY());
-    Serial.print(" ");
-
-    Serial.print("az:");
-    Serial.print(imu.readFloatAccelZ());
-    Serial.print(" ");
-
-    Serial.print("gx:");
-    Serial.print(imu.readFloatGyroX());
-    Serial.print(" ");
-
-    Serial.print("gy:");
-    Serial.print(imu.readFloatGyroY());
-    Serial.print(" ");
-
-    Serial.print("gz:");
-    Serial.println(imu.readFloatGyroZ());
+    Serial.print("ax: "); Serial.print(d.ax);
+    Serial.print(" ay: "); Serial.print(d.ay);
+    Serial.print(" az: "); Serial.print(d.az);
+    Serial.print(" gx: "); Serial.print(d.gx);
+    Serial.print(" gy: "); Serial.print(d.gy);
+    Serial.print(" gz: "); Serial.println(d.gz);
 }
 
 Accel imu_read() {
