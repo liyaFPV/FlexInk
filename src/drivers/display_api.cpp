@@ -16,34 +16,34 @@ void elink_init() {
   u8g2_for_adafruit.setBackgroundColor(GxEPD_WHITE);
 }
 
-void setCursor(int16_t x, int16_t y) {
+void elink_setCursor(int16_t x, int16_t y) {
   u8g2_for_adafruit.setCursor(x, y);
 }
 
-void print(const char* text) {
+void elink_print(const char* text) {
   u8g2_for_adafruit.print(text);
 }
 
-void drawLine(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint16_t color=BLACK) {
+void elink_drawLine(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint16_t color=BLACK) {
   display.drawLine(x0, y0, x1, y1, color);
 }
 
-void display_update() {
+void elink_update() {
   display.display(true);
 }
 
-void display_updateWindow(int16_t x, int16_t y, int16_t width, int16_t height) {
+void elink_updateWindow(int16_t x, int16_t y, int16_t width, int16_t height) {
   display.displayWindow(x, y, width, height);
 }
 
-void fillRect(int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color=BLACK) {
+void elink_fillRect(int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color=BLACK) {
   display.fillRect(x, y, w, h, color);
 }
 
-void drawRect(int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color=BLACK) {
+void elink_drawRect(int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color=BLACK) {
   display.drawRect(x, y, w, h, color);
 }
 
-void clear_screen() {
+void elink_clear() {
   display.fillScreen(GxEPD_WHITE);
 }
