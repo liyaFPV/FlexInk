@@ -2,9 +2,6 @@
 
 LSM6DS3 imu;
 bool imu_initialized = false;
-bool get_imuStatus(){
-    return imu_initialized;
-}
 
 void imu_setup() {
     Wire.begin(imu_sda, imu_scl);
@@ -14,25 +11,11 @@ void imu_setup() {
     }
 }
 
-void imu_test(){
-    Serial.print("\nAccelerometer:\n");
-    Serial.print(" X = ");
-    Serial.println(imu.readFloatAccelX(), 4);
-    Serial.print(" Y = ");
-    Serial.println(imu.readFloatAccelY(), 4);
-    Serial.print(" Z = ");
-    Serial.println(imu.readFloatAccelZ(), 4);
-
-    Serial.print("\nGyroscope:\n");
-    Serial.print(" X = ");
-    Serial.println(imu.readFloatGyroX(), 4);
-    Serial.print(" Y = ");
-    Serial.println(imu.readFloatGyroY(), 4);
-    Serial.print(" Z = ");
-    Serial.println(imu.readFloatGyroZ(), 4);
+bool imu_getStatus(){
+    return imu_initialized;
 }
 
-void imu_comTest(){
+void imu_test(){
     Serial.print("ax:");
     Serial.print(imu.readFloatAccelX());
     Serial.print(" ");
@@ -55,4 +38,18 @@ void imu_comTest(){
 
     Serial.print("gz:");
     Serial.println(imu.readFloatGyroZ());
+}
+
+Accel imu_read() {
+    Accel data;
+
+    data.ax = imu.readFloatAccelX();
+    data.ay = imu.readFloatAccelY();
+    data.az = imu.readFloatAccelZ();
+
+    data.gx = imu.readFloatGyroX();
+    data.gy = imu.readFloatGyroY();
+    data.gz = imu.readFloatGyroZ();
+
+    return data;
 }
