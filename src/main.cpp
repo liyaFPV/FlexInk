@@ -17,12 +17,14 @@ void setup()
   sd_init();
   elink_init();
   imu_setup();
-  display_update();
+  elink_update();
   delay(1000);
-  clear_screen();
-  display_update();
+  elink_clear();
+  elink_update();
 }
 
 void loop() {
-  display_update();
+  elink_setCursor(10, 10);
+  elink_print("tt");
+  elink_update();
 }
