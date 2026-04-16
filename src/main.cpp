@@ -14,7 +14,7 @@ void setup()
 
   pinMode(CS_PIN, OUTPUT);
   digitalWrite(CS_PIN, HIGH);
-  sd_init();
+  //sd_init();
   elink_init();
   imu_setup();
   elink_update();
@@ -24,7 +24,11 @@ void setup()
 }
 
 void loop() {
+  imu_test();
+  delay(200);
+  /*
   elink_setCursor(10, 10);
   elink_print("tt");
   elink_update();
+  */
 }

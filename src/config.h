@@ -13,9 +13,6 @@
 #define imu_sda 5
 #define imu_scl 4
 
-#define rtc_D 5
-#define rtc_C 4
-
 #define btn_up_pin 35
 #define btn_ok_pin 36
 #define btn_down_pin 37

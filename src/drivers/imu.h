@@ -1,5 +1,5 @@
 #include <Wire.h>
-#include "SparkFunLSM6DS3.h"
+#include <LSM6DS3.h>
 #include "config.h"
 
 struct Accel {

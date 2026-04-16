@@ -1,6 +1,6 @@
 #include "imu.h"
 
-LSM6DS3 imu;
+LSM6DS3 imu(I2C_MODE, 0x6A); 
 bool imu_initialized = false;
 
 void imu_setup() {
@@ -18,12 +18,12 @@ bool imu_getStatus(){
 void imu_test(){
     Accel d = imu_read();
 
-    Serial.print("ax: "); Serial.print(d.ax);
-    Serial.print(" ay: "); Serial.print(d.ay);
-    Serial.print(" az: "); Serial.print(d.az);
-    Serial.print(" gx: "); Serial.print(d.gx);
-    Serial.print(" gy: "); Serial.print(d.gy);
-    Serial.print(" gz: "); Serial.println(d.gz);
+    Serial.print("ax:"); Serial.println(d.ax);
+    Serial.print("ay:"); Serial.println(d.ay);
+    Serial.print("az:"); Serial.println(d.az);
+    Serial.print("gx:"); Serial.println(d.gx);
+    Serial.print("gy:"); Serial.println(d.gy);
+    Serial.print("gz:"); Serial.println(d.gz);
 }
 
 Accel imu_read() {
