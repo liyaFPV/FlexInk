@@ -13,16 +13,17 @@ void setup()
 
   pinMode(CS_PIN, OUTPUT);
   digitalWrite(CS_PIN, HIGH);
-  //sd_init();
+  sd_init();
   elink_init();
   elink_update();
   delay(1000);
   elink_clear();
   elink_update();
+  sd_info();
 }
 
 void loop() {
-  elink_setCursor(10, 10);
+  elink_setCursor(0, 0);
   elink_print("tt");
   elink_update();
 }

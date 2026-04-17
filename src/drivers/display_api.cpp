@@ -7,17 +7,19 @@ void elink_init() {
   // hardware SPI с кастомными пинами
   #define ENABLE_GxEPD2_GFX 0
   SPI.begin(CLK_PIN, -1, DIN_PIN, CS_PIN); // SCK, MISO(-1), MOSI, CS
-  display.init(1);
+  display.init(0);
   display.setRotation(1);
   display.fillScreen(GxEPD_WHITE);
   u8g2_for_adafruit.begin(display);
+  u8g2_for_adafruit.setFontMode(1);
   u8g2_for_adafruit.setFont(u8g2_font_unifont_t_cyrillic);
   u8g2_for_adafruit.setForegroundColor(GxEPD_BLACK);
   u8g2_for_adafruit.setBackgroundColor(GxEPD_WHITE);
 }
 
 void elink_setCursor(int16_t x, int16_t y) {
-  u8g2_for_adafruit.setCursor(x, y);
+  int16_t offset = u8g2_for_adafruit.getFontAscent();
+  u8g2_for_adafruit.setCursor(x, y + offset);
 }
 
 void elink_print(const char* text) {
