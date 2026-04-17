@@ -18,5 +18,7 @@
 #define btn_down_pin 37
 #define btn_return_pin 38
 
+#define power_pin 1
 
-#define FW_VERSION "FLEX OS 0.1a"
+
+#define FW_VERSION "FLEX OS 0.2a"

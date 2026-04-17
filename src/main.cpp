@@ -5,12 +5,11 @@
 #include <SPI.h>
 #include "drivers/sd.h"
 #include "drivers/display_api.h"
-void setup()
-{
+
+void setup(){
   Serial.begin(115200);
   setCpuFrequencyMhz(240);
   SPI.begin(12, 2, 13);
-
   pinMode(CS_PIN, OUTPUT);
   digitalWrite(CS_PIN, HIGH);
   sd_init();
@@ -23,7 +22,9 @@ void setup()
 }
 
 void loop() {
-  elink_setCursor(0, 0);
-  elink_print("tt");
+  for(int i=0; i<=8; i++){
+    elink_setCursor(0, 14*i);
+    elink_print(String(i));
+  }
   elink_update();
 }

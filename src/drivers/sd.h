@@ -7,3 +7,4 @@ bool sd_init();
 void sd_info();
 uint64_t sd_get_size();
 bool get_sdStatus();
+void sd_end();

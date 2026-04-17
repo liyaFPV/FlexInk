@@ -8,8 +8,10 @@ bool get_sdStatus(){
 }
 
 bool sd_init(){
+    pinMode(power_pin, OUTPUT);
     pinMode(SD_CS, OUTPUT);
     digitalWrite(SD_CS, HIGH);
+    digitalWrite(power_pin, HIGH);
 
     if (!SD.begin(SD_CS, SPI, 4000000))
     {
@@ -50,4 +52,10 @@ void sd_info(){
 
 uint64_t sd_get_size(){
     return SD.cardSize() / (1024 * 1024);
+}
+
+void sd_end(){
+    SD.end();
+    digitalWrite(power_pin, LOW);
+    sd_status=false;
 }

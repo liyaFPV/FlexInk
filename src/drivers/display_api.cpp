@@ -22,7 +22,7 @@ void elink_setCursor(int16_t x, int16_t y) {
   u8g2_for_adafruit.setCursor(x, y + offset);
 }
 
-void elink_print(const char* text) {
+void elink_print(const String text) {
   u8g2_for_adafruit.print(text);
 }
 
@@ -48,4 +48,13 @@ void elink_drawRect(int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color=B
 
 void elink_clear() {
   display.fillScreen(GxEPD_WHITE);
+}
+
+void elink_sleep(){
+  //print bitmap
+  display.hibernate();
+}
+
+void elink_wakeUp(){
+  elink_init();
 }
