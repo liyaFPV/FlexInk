@@ -7,8 +7,7 @@ bool get_sdStatus(){
     return sd_status;
 }
 
-bool sd_init()
-{
+bool sd_init(){
     pinMode(SD_CS, OUTPUT);
     digitalWrite(SD_CS, HIGH);
 
@@ -23,8 +22,7 @@ bool sd_init()
     return true;
 }
 
-void sd_info()
-{
+void sd_info(){
     cardType = SD.cardType();
 
     if (cardType == CARD_NONE)
@@ -49,7 +47,7 @@ void sd_info()
     Serial.printf("Total space: %lluMB\n", totalBytes);
     Serial.printf("Used space: %lluMB\n", usedBytes);
 }
-uint64_t sd_get_size()
-{
+
+uint64_t sd_get_size(){
     return SD.cardSize() / (1024 * 1024);
 }
