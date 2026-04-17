@@ -5,7 +5,6 @@
 #include <SPI.h>
 #include "drivers/sd.h"
 #include "drivers/display_api.h"
-#include "drivers/imu.h"
 void setup()
 {
   Serial.begin(115200);
@@ -16,7 +15,6 @@ void setup()
   digitalWrite(CS_PIN, HIGH);
   //sd_init();
   elink_init();
-  imu_setup();
   elink_update();
   delay(1000);
   elink_clear();
@@ -24,11 +22,7 @@ void setup()
 }
 
 void loop() {
-  imu_test();
-  delay(200);
-  /*
   elink_setCursor(10, 10);
   elink_print("tt");
   elink_update();
-  */
 }
