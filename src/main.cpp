@@ -6,6 +6,7 @@
 #include "drivers/sd.h"
 #include "drivers/display_api.h"
 #include "fileread.h"
+#include "drivers/btn.h"
 
 void setup(){
   Serial.begin(115200);
@@ -19,9 +20,19 @@ void setup(){
   elink_clear();
   elink_update();
   sd_info();
+  btn_init();
 }
 //7 файлов
 void loop() {
+  btn_tick();
+  Serial.print(btn_up());
+  Serial.print(" ");
+  Serial.print(btn_ok());
+  Serial.print(" ");
+  Serial.print(btn_down());
+  Serial.print(" ");
+  Serial.println(btn_return());
+
   draw_bar();
   draw_files();
   elink_update();
