@@ -17,12 +17,13 @@ void setup(){
   sd_init();
   elink_init();
   elink_clear();
-  update_enabled=true;
+  elink_update();
   sd_info();
   btn_init();
 }
 //7 файлов
 void loop() {
+  elink_clear();
   btn_tick();
   Serial.print(btn_up());
   Serial.print(" ");
@@ -34,5 +35,5 @@ void loop() {
 
   draw_bar();
   draw_files();
-  //elink_update();
+  elink_update();
 }

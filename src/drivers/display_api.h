@@ -7,7 +7,6 @@
 #define BLACK GxEPD_BLACK
 #define WHITE GxEPD_WHITE
 
-extern volatile bool update_enabled;
 extern volatile bool update_done;
 
 //37x9  333символов
