@@ -79,7 +79,12 @@ std::vector<String> listFiles(const char* dirname) {
     File file = root.openNextFile();
     while (file) {
         if (!file.isDirectory()) {
-            files.push_back(String(file.name()));
+            String name = String(file.name());
+
+            // Игнорируем файлы, начинающиеся с точки
+            if (!name.startsWith(".")) {
+                files.push_back(name);
+            }
         }
         file = root.openNextFile();
     }
