@@ -11,8 +11,10 @@ void draw_bar(){
 void draw_files(){
     myFiles = listFiles("/");
     int y=14;
+    elink_setCursor(0,14);
+    elink_print(">");
     for(int i=0; i<myFiles.size(); i++){
-        elink_setCursor(0, y);
+        elink_setCursor(9, y);
         elink_print(myFiles[i]);
         y+=14;
     }
