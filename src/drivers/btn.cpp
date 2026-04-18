@@ -13,25 +13,41 @@ void btn_init(){
 }
 
 void btn_tick(){
+    /*
     btn_up_state = false;
     btn_ok_state = false;
     btn_down_state = false;
     btn_return_state = false;
+    */
     if(digitalRead(btn_ok_pin) == LOW and (millis() - old_ok_time) > btn_time_triger){
-        old_ok_time = millis();
         btn_ok_state = true;
     }
     if(digitalRead(btn_up_pin) == LOW and (millis() - old_up_time) > btn_time_triger){
-        old_up_time = millis();
         btn_up_state = true;
     }
     if(digitalRead(btn_down_pin) == LOW and (millis() - old_down_time) > btn_time_triger){
-        old_down_time = millis();
         btn_down_state = true;
     }
     if(digitalRead(btn_return_pin) == LOW and (millis() - old_return_time) > btn_time_triger){
-        old_return_time = millis();
         btn_return_state = true;
+    }
+
+    if(digitalRead(btn_ok_pin) == HIGH){
+        old_ok_time = millis();
+        btn_ok_state = false;
+    }
+
+    if(digitalRead(btn_up_pin) == HIGH){
+        old_up_time = millis();
+        btn_up_state = false;
+    }
+    if(digitalRead(btn_down_pin) == HIGH){
+        old_down_time = millis();
+        btn_down_state = false;
+    }
+    if(digitalRead(btn_return_pin) == HIGH){
+        old_return_time = millis();
+        btn_return_state = false;
     }
 }
 
