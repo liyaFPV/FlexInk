@@ -1,3 +1,4 @@
+#pragma once
 #include <GxEPD2_BW.h>
 #include <Adafruit_GFX.h>
 #include <U8g2_for_Adafruit_GFX.h>
@@ -5,6 +6,9 @@
 
 #define BLACK GxEPD_BLACK
 #define WHITE GxEPD_WHITE
+
+extern volatile bool update_enabled;
+extern volatile bool update_done;
 
 //37x9  333символов
 void elink_init();//инициализация дисплея

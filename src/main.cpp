@@ -16,9 +16,8 @@ void setup(){
   digitalWrite(CS_PIN, HIGH);
   sd_init();
   elink_init();
-  elink_update();
   elink_clear();
-  elink_update();
+  update_enabled=true;
   sd_info();
   btn_init();
 }
@@ -35,5 +34,5 @@ void loop() {
 
   draw_bar();
   draw_files();
-  elink_update();
+  //elink_update();
 }
