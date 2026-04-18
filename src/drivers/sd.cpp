@@ -1,4 +1,5 @@
 #include "sd.h"
+
 uint8_t cardType;
 
 bool sd_status = false;
@@ -58,4 +59,30 @@ void sd_end(){
     SD.end();
     digitalWrite(power_pin, LOW);
     sd_status=false;
+}
+
+
+std::vector<String> listFiles(const char* dirname) {
+    std::vector<String> files;
+
+    File root = SD.open(dirname);
+    if (!root) {
+        Serial.println("Не удалось открыть директорию");
+        return files;
+    }
+
+    if (!root.isDirectory()) {
+        Serial.println("Это не директория");
+        return files;
+    }
+
+    File file = root.openNextFile();
+    while (file) {
+        if (!file.isDirectory()) {
+            files.push_back(String(file.name()));
+        }
+        file = root.openNextFile();
+    }
+
+    return files;
 }

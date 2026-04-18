@@ -6,6 +6,8 @@
 #include "drivers/sd.h"
 #include "drivers/display_api.h"
 
+std::vector<String> myFiles;
+
 void setup(){
   Serial.begin(115200);
   setCpuFrequencyMhz(240);
@@ -15,16 +17,12 @@ void setup(){
   sd_init();
   elink_init();
   elink_update();
-  delay(1000);
   elink_clear();
   elink_update();
   sd_info();
+  myFiles = listFiles("/");
 }
-
+//7 файлов
 void loop() {
-  for(int i=0; i<=8; i++){
-    elink_setCursor(0, 14*i);
-    elink_print(String(i));
-  }
   elink_update();
 }
