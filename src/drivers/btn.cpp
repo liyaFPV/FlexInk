@@ -1,6 +1,6 @@
 #include"drivers/btn.h"
 
-int btn_time_triger = 80;
+int btn_time_triger = 10;
 
 int old_up_time,old_ok_time,old_down_time,old_return_time = 0;
 bool btn_up_state,btn_ok_state,btn_down_state,btn_return_state = false;

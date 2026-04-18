@@ -2,6 +2,9 @@
 
 std::vector<String> myFiles;
 std::vector<String> pages;
+int cursor=0;
+int old_cursor=-1;
+int page=0;
 
 void draw_bar(){
   elink_setCursor(0, 0);
@@ -10,14 +13,38 @@ void draw_bar(){
 }
 
 void draw_files(){
-    myFiles = listFiles("/");
     int y=14;
-    elink_setCursor(0,14);
+    if(old_cursor==-1){
+        myFiles = listFiles("/");
+    }
+    elink_setCursor(0,14*(cursor+1));
     elink_print(">");
     for(int i=0; i<myFiles.size(); i++){
         elink_setCursor(9, y);
         elink_print(myFiles[i]);
         y+=14;
+    }
+
+    if(btn_up()){
+        cursor--;
+    }
+    if(btn_down()){
+        cursor++;
+    }
+
+    if(cursor<0){
+        cursor = myFiles.size() - 1;
+    }
+    if(cursor>myFiles.size()-1){
+        cursor=0;
+    }
+    if(old_cursor!=cursor and old_cursor==-1){
+        old_cursor=cursor;
+        elink_update();
+    }
+    if(old_cursor!=cursor){
+        old_cursor=cursor;
+        elink_updateWindow(0,0,12,128);
     }
 }
 

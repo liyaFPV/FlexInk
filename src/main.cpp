@@ -25,15 +25,15 @@ void setup(){
 void loop() {
   elink_clear();
   btn_tick();
-  Serial.print(btn_up());
-  Serial.print(" ");
-  Serial.print(btn_ok());
+  /*
+  Serial.print(btn_return());
   Serial.print(" ");
   Serial.print(btn_down());
   Serial.print(" ");
-  Serial.println(btn_return());
-
+  Serial.print(btn_ok());
+  Serial.print(" ");
+  Serial.println(btn_up());
+  */
   draw_bar();
   draw_files();
-  elink_update();
 }
