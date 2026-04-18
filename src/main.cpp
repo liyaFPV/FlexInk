@@ -5,8 +5,7 @@
 #include <SPI.h>
 #include "drivers/sd.h"
 #include "drivers/display_api.h"
-
-std::vector<String> myFiles;
+#include "fileread.h"
 
 void setup(){
   Serial.begin(115200);
@@ -20,9 +19,10 @@ void setup(){
   elink_clear();
   elink_update();
   sd_info();
-  myFiles = listFiles("/");
 }
 //7 файлов
 void loop() {
+  draw_bar();
+  draw_files();
   elink_update();
 }
