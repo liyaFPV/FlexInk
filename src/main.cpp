@@ -19,6 +19,7 @@ void setup(){
   elink_clear();
   elink_update();
   sd_info();
+  Serial.println(readFile("test.txt"));
 }
 //7 файлов
 void loop() {

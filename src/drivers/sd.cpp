@@ -86,3 +86,38 @@ std::vector<String> listFiles(const char* dirname) {
 
     return files;
 }
+
+String readFile(const char *filename) {
+  File root = SD.open("/");
+
+  if (!root || !root.isDirectory()) {
+    Serial.println("Нет доступа к корню SD");
+    return "";
+  }
+
+  File file = root.openNextFile();
+
+  while (file) {
+    String name = file.name();
+
+    if (name == filename) {
+      String content = "";
+
+      while (file.available()) {
+        content += (char)file.read();
+      }
+
+      file.close();
+      root.close();
+      return content;
+    }
+
+    file.close();
+    file = root.openNextFile();
+  }
+
+  root.close();
+
+  Serial.println("Файл не найден");
+  return "";
+}
