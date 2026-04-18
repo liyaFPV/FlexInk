@@ -4,6 +4,8 @@
 #define BUSY_PIN  8
 #define CLK_PIN   12  // SCK
 #define DIN_PIN   13  // MOSI
+#define PAGE_LIMIT 330
+
 
 #define SD_CS   3
 #define SD_MOSI 13
@@ -19,6 +21,5 @@
 #define btn_return_pin 38
 
 #define power_pin 1
-
 
 #define FW_VERSION "FLEX OS 0.2a"
