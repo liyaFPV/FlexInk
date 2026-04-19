@@ -6,6 +6,99 @@ int cursor=0;
 int old_cursor=-1;
 int page=0;
 
+void splitTextToPages(String text) {
+  pages.clear();
+
+  const int LIMIT = 37*2;
+
+  String currentPage = "";
+  String word = "";
+  int lineLen = 0;
+
+  int len = text.length();
+
+  for (int i = 0; i < len; i++) {
+    char c = text[i];
+
+    // перенос строки
+    if (c == '\n') {
+      if (lineLen > 0) {
+        currentPage += '\n';
+        lineLen = 0;
+      }
+      continue;
+    }
+
+    // разделители
+    if (c == ' ' || c == '\t') {
+      if (word.length() > 0) {
+
+        int needed = word.length() + (lineLen > 0 ? 1 : 0);
+
+        // если слово не помещается — перенос строки
+        if (lineLen + needed > LIMIT) {
+          currentPage += '\n';
+          lineLen = 0;
+        }
+
+        // добавляем пробел если не начало строки
+        if (lineLen > 0) {
+          currentPage += ' ';
+          lineLen++;
+        }
+
+        currentPage += word;
+        lineLen += word.length();
+
+        word = "";
+      }
+    } else {
+      word += c;
+    }
+  }
+
+  // последнее слово
+  if (word.length() > 0) {
+    int needed = word.length() + (lineLen > 0 ? 1 : 0);
+
+    if (lineLen + needed > LIMIT) {
+      currentPage += '\n';
+      lineLen = 0;
+    }
+
+    if (lineLen > 0) {
+      currentPage += ' ';
+      lineLen++;
+    }
+
+    currentPage += word;
+  }
+
+  // одна страница (ты сам режешь дальше)
+  if (currentPage.length() > 0) {
+    pages.push_back(currentPage);
+  }
+}
+
+void show_page() {
+  int ii = 0;
+  elink_clear();
+  elink_setCursor(0, ii);
+
+  int maxPages = pages.size();   // 🔥 важно
+
+  for (int i = 0; i < maxPages && i < 8; i++) {
+    elink_setCursor(0, ii);
+    elink_print(pages[i]);
+    Serial.println(pages[i]);
+    ii += 14;
+  }
+
+  elink_update();
+
+  while (true) {}
+}
+
 void draw_bar(){
   elink_setCursor(0, 0);
   elink_print("Files on SD:");
@@ -31,6 +124,13 @@ void draw_files(){
     if(btn_down()){
         cursor++;
     }
+    if(btn_ok()){
+        Serial.println("Selected file: " + myFiles[cursor]);
+        String path = myFiles[cursor];
+        String content = readFile(path.c_str());
+        splitTextToPages(content);
+        show_page();
+    }
 
     if(cursor<0){
         cursor = myFiles.size() - 1;
@@ -40,65 +140,10 @@ void draw_files(){
     }
     if(old_cursor!=cursor and old_cursor==-1){
         old_cursor=cursor;
-        elink_update();
+        elink_update(); 
     }
     if(old_cursor!=cursor){
         old_cursor=cursor;
         elink_updateWindow(0,0,12,128);
     }
-}
-
-void splitTextToPages(String text) {
-  pages.clear();
-
-  String currentPage = "";
-  String word = "";
-  int count = 0;
-
-  int len = text.length();
-
-  for (int i = 0; i < len; i++) {
-    char c = text[i];
-
-    // перенос строки НЕ считаем
-    if (c == '\n') {
-      currentPage += c;
-      continue;
-    }
-
-    if (c == ' ' || c == '\t') {
-      // добавляем слово
-      if (word.length() > 0) {
-
-        if (count + word.length() > PAGE_LIMIT) {
-          // новая страница
-          pages.push_back(currentPage);
-          currentPage = "";
-          count = 0;
-        }
-
-        currentPage += word;
-        currentPage += ' ';
-        count += word.length() + 1;
-
-        word = "";
-      }
-    } else {
-      word += c;
-    }
-  }
-
-  // последнее слово
-  if (word.length() > 0) {
-    if (count + word.length() > PAGE_LIMIT) {
-      pages.push_back(currentPage);
-      currentPage = "";
-      count = 0;
-    }
-    currentPage += word;
-  }
-
-  if (currentPage.length() > 0) {
-    pages.push_back(currentPage);
-  }
 }
